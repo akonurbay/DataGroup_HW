@@ -6,6 +6,12 @@ class AppValidator {
     if (!value.contains("@")) {
       return "Email должен содержать @";
     }
+    if (!value.contains(".")) {
+      return "Email должен содержать .";
+    }
+    if (value.trim().length < 5) {
+      return "Минимум 5 символов";
+    }
     return null;
   }
 
@@ -13,7 +19,7 @@ class AppValidator {
     if (value == null || value.trim().isEmpty) {
       return "Введите пароль";
     }
-    if (value.length < 6) {
+    if (value.trim().length < 6) {
       return "Минимум 6 символов";
     }
     return null;
