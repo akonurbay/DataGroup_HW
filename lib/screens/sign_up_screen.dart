@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lesson/core/validators/app_validator.dart';
+import 'package:lesson/core/utils/validators/app_validator.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -50,7 +50,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 const SizedBox(height: 35),
                 const Text(
-                  'WELCOME TO LESSON 12',
+                  'WELCOME TO LESSON 12\n    after login LESSON 13',
+                  
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
                 ),
                 const SizedBox(height: 30),
@@ -95,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             log("Form is validated", name: "Form");
+                            Navigator.pushNamed(context, '/home');
                           }
                         },
                         style: TextButton.styleFrom(
