@@ -15,13 +15,28 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
+              Text('Here lesson 14',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+              Icon(Icons.arrow_downward_sharp,size: 40,),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/list');
+                },
+                icon: Icon(Icons.touch_app_outlined, size: 60,color: Colors.amber,),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/guitar');
+                },
+                icon: Icon(Icons.my_library_music, size: 50),
+              ),
+              IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/details');
                 },
-                child: Text('datails'),
+                icon: Icon(Icons.details, size: 50),
               ),
-              TextButton(
+              SizedBox(height: 5),
+              IconButton(
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
@@ -29,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                     arguments: 'From Home Screen',
                   );
                 },
-                child: Text('settings'),
+                icon: Icon(Icons.settings, size: 50),
               ),
             ],
           ),
