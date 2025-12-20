@@ -15,13 +15,50 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Here lesson 14',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-              Icon(Icons.arrow_downward_sharp,size: 40,),
+              Text(
+                'Here lesson 14',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Icon(
+                Icons.arrow_downward_sharp,
+                size: 40,
+              ),
               IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/list');
                 },
-                icon: Icon(Icons.touch_app_outlined, size: 60,color: Colors.amber,),
+                icon: Icon(
+                  Icons.touch_app_outlined,
+                  size: 60,
+                  color: Colors.amber,
+                ),
+              ),
+              Row(
+                
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  
+                  Spacer(),
+                  Icon(Icons.arrow_forward_outlined,size: 40,),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/cartoon');
+                    },
+                    icon: Icon(
+                      Icons.movie_creation_outlined,
+                      size: 60,
+                      color: Colors.red,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_back_outlined,
+                    size: 40,
+                  ),
+                  Text(
+                    'Here lesson 15',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
               IconButton(
                 onPressed: () {

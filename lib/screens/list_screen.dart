@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lesson/screens/todo_model.dart';
+import 'package:lesson/data/todo_model.dart';
 
 class ListScreen extends StatefulWidget {
   const ListScreen({super.key});
