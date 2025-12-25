@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lesson/screens/cartoon.dart';
+import 'package:lesson/screens/counter_page.dart';
 import 'package:lesson/screens/details_screen.dart';
 import 'package:lesson/screens/guitar_photos.dart';
 import 'package:lesson/screens/home_screen.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
       routes: {
+        '/counter':(context)=> CounterPage(),
         '/login': (context) => SignUpScreen(),
         '/home': (context) => HomeScreen(),
         '/details': (context) => DetailsScreen(),
