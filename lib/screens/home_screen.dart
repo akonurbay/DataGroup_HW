@@ -87,6 +87,33 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              Row(
+                
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  
+                  Spacer(),
+                  Icon(Icons.arrow_forward_outlined,size: 40,),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/tasks');
+                    },
+                    icon: Icon(
+                      Icons.control_point_duplicate_rounded,
+                      size: 60,
+                      color: Colors.red,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_back_outlined,
+                    size: 40,
+                  ),
+                  Text(
+                    'Here lesson 17',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
               IconButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/guitar');
