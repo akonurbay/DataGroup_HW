@@ -4,7 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lesson/core/utils/validators/app_validator.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  final Function(bool)? onThemeChanged;
+
+  const SignUpScreen({super.key, this.onThemeChanged});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -34,90 +36,113 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Center(
+              child: Switch(
+                value: isDarkMode,
+                onChanged: (value) {
+                  widget.onThemeChanged?.call(value);
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  'assets/images/logo_login.svg',
-                  height: 150,
-                  width: 150,
-                ),
-
-                const SizedBox(height: 35),
-                const Text(
-                  'WELCOME TO LESSON 12\n    after login LESSON 13',
-                  
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
-                ),
-                const SizedBox(height: 30),
-
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      _InputField(
-                        controller: _emailController,
-                        hintText: 'Email',
-                        prefixIcon: const Icon(Icons.email),
-                        validator: AppValidator.emailValidate,
-                      ),
-
-                      const SizedBox(height: 20),
-
-                      _InputField(
-                        controller: _passwordController,
-                        hintText: "Пароль",
-                        prefixIcon: const Icon(Icons.lock),
-                        obscure: hidePassword,
-                        validator: AppValidator.passwordValidate,
-                        suffix: IconButton(
-                          icon: Icon(
-                            hidePassword
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: Colors.grey,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              hidePassword = !hidePassword;
-                            });
-                          },
-                        ),
-                      ),
-
-                      const SizedBox(height: 30),
-
-                      TextButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            log("Form is validated", name: "Form");
-                            Navigator.pushNamed(context, '/home');
-                          }
-                        },
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 50,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(13),
-                          ),
-                        ),
-                        child: const Text(
-                          'LOGIN',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
-                        ),
-                      ),
-                    ],
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: width > 600 ? 60.0 : 30.0,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/logo_login.svg',
+                    height: width > 600 ? 200 : 150,
+                    width: width > 600 ? 200 : 150,
                   ),
-                ),
-              ],
+                  SizedBox(height: width > 600 ? 50 : 35),
+                  Text(
+                    'WELCOME TO LESSON 12\n    after login LESSON 13',
+                    style: TextStyle(
+                      fontSize: width > 600 ? 30 : 25,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: width > 600 ? 40 : 30),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        _InputField(
+                          controller: _emailController,
+                          hintText: 'Email',
+                          prefixIcon: const Icon(Icons.email),
+                          validator: AppValidator.emailValidate,
+                        ),
+                        SizedBox(height: width > 600 ? 30 : 20),
+                        _InputField(
+                          controller: _passwordController,
+                          hintText: "Пароль",
+                          prefixIcon: const Icon(Icons.lock),
+                          obscure: hidePassword,
+                          validator: AppValidator.passwordValidate,
+                          suffix: IconButton(
+                            icon: Icon(
+                              hidePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                hidePassword = !hidePassword;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(height: width > 600 ? 40 : 30),
+                        TextButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              log("Form is validated", name: "Form");
+                              Navigator.pushNamed(context, '/home');
+                            }
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            padding: EdgeInsets.symmetric(
+                              vertical: width > 600 ? 12 : 8,
+                              horizontal: width > 600 ? 70 : 50,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(13),
+                            ),
+                          ),
+                          child: Text(
+                            'LOGIN',
+                            style: TextStyle(
+                              fontSize: width > 600 ? 24 : 20,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -128,7 +153,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 class _InputField extends StatelessWidget {
   const _InputField({
-    super.key,
     required this.hintText,
     required this.prefixIcon,
     required this.validator,

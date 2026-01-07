@@ -15,21 +15,99 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+// Определение светлой темы
+final ThemeData lightTheme = ThemeData.light(
+  useMaterial3: true,
+).copyWith(
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.blue,
+    brightness: Brightness.light,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.blue,
+    foregroundColor: Colors.white,
+    elevation: 4,
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Colors.blue,
+    foregroundColor: Colors.white,
+  ),
+  textTheme: TextTheme(
+    headlineLarge: const TextStyle(
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+      color: Colors.black87,
+    ),
+    bodyLarge: const TextStyle(
+      fontSize: 16,
+      color: Colors.black87,
+    ),
+  ),
+);
+
+// Определение тёмной темы
+final ThemeData darkTheme = ThemeData.dark(
+  useMaterial3: true,
+).copyWith(
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: Colors.amber,
+    brightness: Brightness.dark,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor: Colors.grey[900],
+    foregroundColor: Colors.white,
+    elevation: 4,
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: Colors.amber,
+    foregroundColor: Colors.black,
+  ),
+  textTheme: TextTheme(
+    headlineLarge: const TextStyle(
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+    bodyLarge: const TextStyle(
+      fontSize: 16,
+      color: Colors.white70,
+    ),
+  ),
+);
+
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext? context) {
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isDark = false;
+
+  @override
+  Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TasksProvider(),
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: isDark ? ThemeMode.dark : ThemeMode.light,
         initialRoute: '/login',
         routes: {
           '/counter': (context) => CounterPage(),
-          '/login': (context) => SignUpScreen(),
-          '/home': (context) => HomeScreen(),
+          '/login': (context) => SignUpScreen(onThemeChanged: (bool isDarkMode) {
+            setState(() {
+              isDark = isDarkMode;
+            });
+          }),
+          '/home': (context) => HomeScreen(onThemeChanged: (bool isDarkMode) {
+            setState(() {
+              isDark = isDarkMode;
+            });
+          }),
           '/details': (context) => DetailsScreen(),
           '/guitar': (context) => GuitarPhotos(),
           '/list': (context) => ListScreen(),
@@ -37,7 +115,7 @@ class MyApp extends StatelessWidget {
           '/settings': (context) => SettingsScreen(
             title: ModalRoute.of(context)!.settings.arguments as String,
           ),
-          '/tasks': (context) => const TasksScreen(), // новый маршрут
+          '/tasks': (context) => const TasksScreen(),
         },
       ),
     );
