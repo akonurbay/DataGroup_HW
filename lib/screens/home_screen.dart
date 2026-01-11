@@ -144,6 +144,31 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.arrow_forward_outlined, size: 40),
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/gallery');
+                },
+                icon: const Icon(
+                  Icons.photo_library,
+                  size: 60,
+                  color: Colors.green,
+                ),
+              ),
+              const Icon(Icons.arrow_back_outlined, size: 40),
+              Expanded(
+                child: Text(
+                  'Домашка 19',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -181,12 +206,19 @@ class HomeScreen extends StatelessWidget {
     return Center(
       child: Column(
         children: [
+          const SizedBox(height: 30),
+          _FeatureButton(
+            icon: Icons.photo_library,
+            label: 'Домашка 19',
+            onPressed: () {
+              Navigator.pushNamed(context, '/gallery');
+            },
+          ),
           Text(
             'Here lesson 14',
-            style: Theme.of(context)
-                .textTheme
-                .headlineLarge
-                ?.copyWith(fontSize: 40),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineLarge?.copyWith(fontSize: 40),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
@@ -219,10 +251,9 @@ class HomeScreen extends StatelessWidget {
               const Icon(Icons.arrow_back_outlined, size: 50),
               Text(
                 'Here lesson 15',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontSize: 20),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(fontSize: 20),
               ),
               const SizedBox(width: 40),
               const Icon(Icons.arrow_forward_outlined, size: 50),
@@ -239,10 +270,9 @@ class HomeScreen extends StatelessWidget {
               const Icon(Icons.arrow_back_outlined, size: 50),
               Text(
                 'Here lesson 16',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontSize: 20),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(fontSize: 20),
               ),
             ],
           ),
@@ -264,10 +294,9 @@ class HomeScreen extends StatelessWidget {
               const Icon(Icons.arrow_back_outlined, size: 50),
               Text(
                 'Here lesson 17',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontSize: 20),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(fontSize: 20),
               ),
             ],
           ),

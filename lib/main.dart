@@ -10,6 +10,7 @@ import 'package:lesson/screens/sign_up_screen.dart';
 import 'package:lesson/providers/tasks_provider.dart';
 import 'package:lesson/screens/tasks_screen.dart';
 import 'package:provider/provider.dart'; // новый экран
+import 'package:lesson/screens/gallery_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -116,6 +117,7 @@ class _MyAppState extends State<MyApp> {
             title: ModalRoute.of(context)!.settings.arguments as String,
           ),
           '/tasks': (context) => const TasksScreen(),
+          '/gallery': (context) => const GalleryScreen(),
         },
       ),
     );
